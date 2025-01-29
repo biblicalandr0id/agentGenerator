@@ -1,0 +1,931 @@
+#tool_definition.json
+[
+  {
+    "name": "SystemInfo",
+    "description": "Core system information and capabilities",
+    "version": "2.0.0",
+    "capabilities": [
+      {
+        "name": "Async Tool Execution",
+        "description": "Enables non-blocking execution of tools"
+      },
+      {
+        "name": "AI-Powered Parameter Validation",
+        "description": "Intelligent validation of tool parameters"
+      },
+      {
+        "name": "Real-time State Management",
+        "description": "Dynamic tracking of system state"
+      },
+      {
+        "name": "Smart Error Recovery",
+        "description": "Automated error detection and recovery"
+      },
+      {
+        "name": "Dynamic Resource Allocation",
+        "description": "Intelligent distribution of system resources"
+      },
+      {
+        "name": "Natural Language Processing",
+        "description": "Processing and understanding of human language"
+      },
+      {
+        "name": "Machine Learning Integration",
+        "description": "Integration with advanced ML models"
+      }
+    ]
+  },
+  {
+    "name": "ToolDefinitionModule",
+    "description": "Module for defining and managing tools",
+    "classes": [
+      {
+        "name": "AIToolDefinition",
+        "description": "Definition of AI-enhanced tools",
+        "inherits": "ToolDefinition",
+        "type": "dataclass",
+        "fields": [
+          {
+            "name": "name",
+            "description": "Unique identifier for the tool",
+            "type": "str"
+          },
+          {
+            "name": "description",
+            "description": "Detailed explanation of tool functionality",
+            "type": "str"
+          },
+          {
+            "name": "schema",
+            "description": "Parameter schema definition",
+            "type": "Dict[str, Any]"
+          },
+          {
+            "name": "ai_capabilities",
+            "description": "List of AI features supported",
+            "type": "List[str]"
+          },
+          {
+            "name": "required_compute",
+            "description": "Required computational resources",
+            "type": "Dict[str, float]"
+          },
+          {
+            "name": "input_processors",
+            "description": "Functions for processing inputs",
+            "type": "List[Callable]"
+          },
+          {
+            "name": "output_processors",
+            "description": "Functions for processing outputs",
+            "type": "List[Callable]"
+          },
+          {
+            "name": "fallback_strategies",
+            "description": "Error recovery strategies",
+            "type": "List[str]"
+          },
+          {
+            "name": "performance_metrics",
+            "description": "Performance monitoring metrics",
+            "type": "Dict[str, Any]"
+          },
+          {
+            "name": "security_level",
+            "description": "Required security clearance",
+            "type": "SecurityLevel"
+          },
+          {
+            "name": "rate_limits",
+            "description": "Execution rate limiting",
+            "type": "Optional[RateLimit]"
+          },
+          {
+            "name": "caching_strategy",
+            "description": "Strategy for result caching",
+            "type": "CacheStrategy"
+          }
+        ]
+      },
+      {
+        "name": "SmartToolRegistry",
+        "description": "Registry for managing AI tools",
+        "inherits": "ToolRegistry",
+        "methods": [
+          {
+            "name": "register_tool",
+            "description": "Register a new tool in the system",
+            "params": ["tool: AIToolDefinition"],
+            "return": "None",
+            "features": [
+              {
+                "name": "auto_validation",
+                "description": "Automatic tool validation"
+              },
+              {
+                "name": "dependency_check",
+                "description": "Dependency verification"
+              }
+            ]
+          },
+          {
+            "name": "get_tool",
+            "description": "Retrieve a tool by name with context",
+            "params": ["name: str", "context: Optional[ExecutionContext]"],
+            "return": "Optional[AIToolDefinition]",
+            "features": [
+              {
+                "name": "smart_matching",
+                "description": "Intelligent tool matching"
+              },
+              {
+                "name": "context_aware",
+                "description": "Context-based optimization"
+              }
+            ]
+          },
+          {
+            "name": "discover_tools",
+            "description": "Find tools matching criteria",
+            "params": ["query: str", "requirements: Dict[str, Any]"],
+            "return": "List[AIToolDefinition]",
+            "features": [
+              {
+                "name": "semantic_search",
+                "description": "Meaning-based tool search"
+              },
+              {
+                "name": "capability_matching",
+                "description": "Feature-based matching"
+              }
+            ]
+          },
+          {
+            "name": "analyze_tool_usage",
+            "description": "Analyze tool usage patterns",
+            "params": ["timeframe: TimePeriod"],
+            "return": "ToolAnalytics",
+            "features": [
+              {
+                "name": "performance_tracking",
+                "description": "Usage performance analysis"
+              },
+              {
+                "name": "optimization_suggestions",
+                "description": "Usage optimization recommendations"
+              }
+            ]
+          }
+        ],
+        "attributes": [
+          {
+            "name": "_tools",
+            "description": "Internal tool storage",
+            "type": "Dict[str, AIToolDefinition]"
+          },
+          {
+            "name": "_tool_analytics",
+            "description": "Tool usage analytics",
+            "type": "AnalyticsEngine"
+          },
+          {
+            "name": "_capability_index",
+            "description": "Tool capability index",
+            "type": "SemanticIndex"
+          },
+          {
+            "name": "_execution_history",
+            "description": "Tool execution history",
+            "type": "HistoryTracker"
+          }
+        ]
+      },
+      {
+        "name": "AIParameterValidator",
+        "description": "AI-powered parameter validation",
+        "inherits": "ParameterValidator",
+        "methods": [
+          {
+            "name": "validate_params",
+            "description": "Validate parameters with AI",
+            "params": [
+              "tool: AIToolDefinition",
+              "params: Dict[str, Any]",
+              "context: ExecutionContext"
+            ],
+            "return": "ValidationResult",
+            "features": [
+              {
+                "name": "type_checking",
+                "description": "Parameter type validation"
+              },
+              {
+                "name": "semantic_validation",
+                "description": "Meaning-based validation"
+              },
+              {
+                "name": "security_scanning",
+                "description": "Security threat detection"
+              },
+              {
+                "name": "performance_impact_analysis",
+                "description": "Performance impact assessment"
+              }
+            ]
+          },
+          {
+            "name": "suggest_params",
+            "description": "Suggest parameter values",
+            "params": ["tool: AIToolDefinition", "partial_params: Dict[str, Any]"],
+            "return": "List[ParamSuggestion]",
+            "features": [
+              {
+                "name": "context_aware",
+                "description": "Context-based suggestions"
+              },
+              {
+                "name": "historical_learning",
+                "description": "Learning from past usage"
+              }
+            ]
+          },
+          {
+            "name": "optimize_params",
+            "description": "Optimize parameter values",
+            "params": ["tool: AIToolDefinition", "params: Dict[str, Any]"],
+            "return": "OptimizedParams",
+            "features": [
+              {
+                "name": "performance_optimization",
+                "description": "Performance-based optimization"
+              },
+              {
+                "name": "resource_efficiency",
+                "description": "Resource usage optimization"
+              }
+            ]
+          }
+        ],
+        "integrations": [
+          {
+            "name": "ai_models",
+            "description": "AI model integrations",
+            "models": [
+              {
+                "name": "parameter_validator_model",
+                "description": "Model for parameter validation"
+              },
+              {
+                "name": "security_scanner_model",
+                "description": "Model for security scanning"
+              }
+            ]
+          },
+          {
+            "name": "external_services",
+            "description": "External service integrations",
+            "services": [
+              {
+                "name": "security_scanning_api",
+                "description": "API for security scanning"
+              },
+              {
+                "name": "performance_monitoring_api",
+                "description": "API for performance monitoring"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "enums": [
+      {
+        "name": "SecurityLevel",
+        "description": "Security clearance levels",
+        "values": ["LOW", "MEDIUM", "HIGH", "CRITICAL"],
+        "permissions": [
+          {
+            "name": "LOW",
+            "description": "Basic execution permissions",
+            "allowed": ["basic_execution"]
+          },
+          {
+            "name": "MEDIUM",
+            "description": "Standard operation permissions",
+            "allowed": ["file_access", "network_calls"]
+          },
+          {
+            "name": "HIGH",
+            "description": "Advanced operation permissions",
+            "allowed": ["system_modification", "data_processing"]
+          },
+          {
+            "name": "CRITICAL",
+            "description": "Full system access",
+            "allowed": ["all_permissions"]
+          }
+        ]
+      },
+      {
+        "name": "ExecutionPriority",
+        "description": "Tool execution priority levels",
+        "values": ["LOW", "NORMAL", "HIGH", "CRITICAL"],
+        "resource_allocation": [
+          {
+            "name": "LOW",
+            "description": "Minimal resource allocation",
+            "resources": {
+              "name": "LowResourcesContainer",
+              "description": "Container for low priority resource configuration",
+              "config": {
+                "name": "MinimalResourceConfig",
+                "description": "Basic resource configuration for low-priority tasks",
+                "cpu": 0.2,
+                "memory": "256MB"
+              }
+            }
+          },
+          {
+            "name": "NORMAL",
+            "description": "Standard resource allocation",
+            "resources": {
+              "name": "NormalResourcesContainer",
+              "description": "Container for normal priority resource configuration",
+              "config": {
+                "name": "StandardResourceConfig",
+                "description": "Standard resource configuration for normal tasks",
+                "cpu": 0.5,
+                "memory": "512MB"
+              }
+            }
+          },
+          {
+            "name": "HIGH",
+            "description": "Priority resource allocation",
+            "resources": {
+              "name": "HighResourcesContainer",
+              "description": "Container for high priority resource configuration",
+              "config": {
+                "name": "PriorityResourceConfig",
+                "description": "Enhanced resource configuration for high-priority tasks",
+                "cpu": 0.8,
+                "memory": "1GB"
+              }
+            }
+          },
+          {
+            "name": "CRITICAL",
+            "description": "Maximum resource allocation",
+            "resources": {
+              "name": "CriticalResourcesContainer",
+              "description": "Container for critical priority resource configuration",
+              "config": {
+                "name": "CriticalResourceConfig",
+                "description": "Maximum resource configuration for critical tasks",
+                "cpu": 1.0,
+                "memory": "2GB"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "OrchestratorModule",
+    "description": "Orchestrates tool execution and management",
+    "classes": [
+      {
+        "name": "AIToolOrchestrator",
+        "description": "AI-enhanced tool orchestration",
+        "inherits": "ToolOrchestrator",
+        "attributes": [
+          {
+            "name": "registry",
+            "description": "Tool registry instance",
+            "type": "SmartToolRegistry"
+          },
+          {
+            "name": "validator",
+            "description": "Parameter validator instance",
+            "type": "AIParameterValidator"
+          },
+          {
+            "name": "state_tracker",
+            "description": "State tracking instance",
+            "type": "AIStateTracker"
+          },
+          {
+            "name": "execution_manager",
+            "description": "Execution management instance",
+            "type": "AIExecutionManager"
+          },
+          {
+            "name": "resource_manager",
+            "description": "Resource management instance",
+            "type": "ResourceManager"
+          },
+          {
+            "name": "ai_engine",
+            "description": "AI engine instance",
+            "type": "AIEngine"
+          }
+        ],
+        "methods": [
+          {
+            "name": "execute_tool",
+            "description": "Execute a tool with AI optimization",
+            "params": [
+              "tool_name: str",
+              "params: Dict[str, Any]",
+              "context: Optional[ExecutionContext]"
+            ],
+            "return": "ExecutionResult",
+            "async": true,
+            "features": [
+              {
+                "name": "smart_routing",
+                "description": "Intelligent execution routing"
+              },
+              {
+                "name": "auto_recovery",
+                "description": "Automatic error recovery"
+              },
+              {
+                "name": "performance_optimization",
+                "description": "Execution optimization"
+              }
+            ]
+          },
+          {
+            "name": "chain_tools",
+            "description": "Execute multiple tools in sequence",
+            "params": [
+              "tool_chain: List[str]",
+              "params: Dict[str, Any]",
+              "optimization_level: OptimizationLevel"
+            ],
+            "return": "ChainExecutionResult",
+            "async": true,
+            "features": [
+              {
+                "name": "parallel_execution",
+                "description": "Parallel tool execution"
+              },
+              {
+                "name": "dependency_resolution",
+                "description": "Tool dependency handling"
+              },
+              {
+                "name": "error_propagation",
+                "description": "Chain error handling"
+              }
+            ]
+          },
+          {
+            "name": "analyze_execution",
+            "description": "Analyze tool execution",
+            "params": ["execution_id: str"],
+            "return": "ExecutionAnalytics",
+            "features": [
+              {
+                "name": "performance_analysis",
+                "description": "Execution performance analysis"
+              },
+              {
+                "name": "resource_usage_tracking",
+                "description": "Resource usage monitoring"
+              },
+              {
+                "name": "bottleneck_detection",
+                "description": "Performance bottleneck detection"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "StateManagementModule",
+    "description": "Manages system state and tracking",
+    "classes": [
+      {
+        "name": "AIStateTracker",
+        "description": "AI-enhanced state tracking",
+        "inherits": "StateTracker",
+        "attributes": [
+          {
+            "name": "_conversation_state",
+            "description": "Conversation state storage",
+            "type": "Dict[str, Any]"
+          },
+          {
+            "name": "_operation_history",
+            "description": "Operation history storage",
+            "type": "List[AIOperationContext]"
+          },
+          {
+            "name": "_active_operations",
+            "description": "Active operations tracking",
+            "type": "Dict[str, AIOperationContext]"
+          },
+          {
+            "name": "_state_analyzer",
+            "description": "State analysis engine",
+            "type": "StateAnalyzer"
+          },
+          {
+            "name": "_prediction_engine",
+            "description": "State prediction engine",
+            "type": "PredictionEngine"
+          }
+        ],
+        "methods": [
+          {
+            "name": "predict_state_changes",
+            "description": "Predict future state changes",
+            "params": ["operation: AIOperationContext"],
+            "return": "StatePrediction",
+            "features": [
+              {
+                "name": "ml_prediction",
+                "description": "ML-based state prediction"
+              },
+              {
+                "name": "impact_analysis",
+                "description": "Change impact analysis"
+              }
+            ]
+          },
+          {
+            "name": "optimize_state",
+            "description": "Optimize system state",
+            "params": ["optimization_target: OptimizationTarget"],
+            "return": "OptimizedState",
+            "features": [
+              {
+                "name": "state_compression",
+                "description": "State data compression"
+              },
+              {
+                "name": "cleanup_scheduling",
+                "description": "State cleanup scheduling"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "ExecutionModule",
+    "description": "Handles tool execution",
+    "classes": [
+      {
+        "name": "AIExecutionManager",
+        "description": "AI-enhanced execution management",
+        "inherits": "ExecutionManager",
+        "attributes": [
+          {
+            "name": "state_tracker",
+            "description": "State tracking component",
+            "type": "AIStateTracker"
+          },
+          {
+            "name": "validator",
+            "description": "Parameter validation component",
+            "type": "AIParameterValidator"
+          },
+          {
+            "name": "_running_tasks",
+            "description": "Active task tracking",
+            "type": "Dict[str, asyncio.Task]"
+          },
+          {
+            "name": "resource_monitor",
+            "description": "Resource monitoring component",
+            "type": "ResourceMonitor"
+          },
+          {
+            "name": "performance_analyzer",
+            "description": "Performance analysis component",
+            "type": "PerformanceAnalyzer"
+          }
+        ],
+        "methods": [
+          {
+            "name": "execute_tool",
+            "description": "Execute a tool with AI optimization",
+            "params": [
+              "tool: AIToolDefinition",
+              "params: Dict[str, Any]",
+              "context: ExecutionContext"
+            ],
+            "return": "AIOperationContext",
+            "async": true,
+            "features": [
+              {
+                "name": "resource_optimization",
+                "description": "Resource usage optimization"
+              },
+              {
+                "name": "error_prediction",
+                "description": "Predictive error detection"
+              },
+              {
+                "name": "auto_scaling",
+                "description": "Automatic resource scaling"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "AIEngineModule",
+    "description": "Core AI functionality",
+    "components": [
+      {
+        "name": "ModelManager",
+        "description": "Manages AI models",
+        "supported_models": [
+          {
+            "name": "text-embedding-ada-002",
+            "description": "OpenAI's text embedding model",
+            "version": "1.0"
+          },
+          {
+            "name": "gpt-4",
+            "description": "Advanced language model",
+            "version": "1.0"
+          },
+          {
+            "name": "gemini-pro",
+            "description": "Google's advanced AI model",
+            "version": "1.0"
+          },
+          {
+            "name": "claude-2",
+            "description": "Anthropic's language model",
+            "version": "1.0"
+          }
+        ],
+        "features": [
+          {
+            "name": "model_selection",
+            "description": "Intelligent model selection",
+            "priority": 1
+          },
+          {
+            "name": "prompt_optimization",
+            "description": "Optimize model prompts",
+            "priority": 2
+          },
+          {
+            "name": "response_processing",
+            "description": "Process model responses",
+            "priority": 3
+          }
+        ]
+      },
+      {
+        "name": "ResourceOptimizer",
+        "description": "Optimizes AI resource usage",
+        "optimization_targets": [
+          {
+            "name": "latency",
+            "description": "Response time optimization",
+            "priority": 1
+          },
+          {
+            "name": "throughput",
+            "description": "Processing capacity optimization",
+            "priority": 2
+          },
+          {
+            "name": "cost",
+            "description": "Cost optimization",
+            "priority": 3
+          },
+          {
+            "name": "quality",
+            "description": "Output quality optimization",
+            "priority": 4
+          }
+        ],
+        "strategies": [
+          {
+            "name": "dynamic_scaling",
+            "description": "Dynamic resource scaling",
+            "priority": 1
+          },
+          {
+            "name": "load_balancing",
+            "description": "Load distribution",
+            "priority": 2
+          },
+          {
+            "name": "caching",
+            "description": "Result caching",
+            "priority": 3
+          },
+          {
+            "name": "batching",
+            "description": "Request batching",
+            "priority": 4
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "SystemTools",
+    "description": "Core system tool implementations",
+    "classes": [
+      {
+        "name": "codebase_search",
+        "description": "Find snippets of code from the codebase most relevant to the search query",
+        "type": "tool",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "Query": {
+              "type": "string",
+              "description": "Search query"
+            },
+            "TargetDirectories": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "List of absolute paths to directories to search over"
+            }
+          },
+          "required": ["Query", "TargetDirectories"]
+        }
+      },
+      {
+        "name": "grep_search",
+        "description": "Fast text-based search that finds exact pattern matches within files or directories",
+        "type": "tool",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "SearchDirectory": {
+              "type": "string",
+              "description": "The directory from which to run the ripgrep command"
+            },
+            "Query": {
+              "type": "string",
+              "description": "The search term or pattern to look for within files"
+            },
+            "MatchPerLine": {
+              "type": "boolean",
+              "description": "If true, returns each line that matches the query"
+            },
+            "Includes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The files or directories to search within"
+            },
+            "CaseInsensitive": {
+              "type": "boolean",
+              "description": "If true, performs a case-insensitive search"
+            }
+          },
+          "required": ["SearchDirectory", "Query", "MatchPerLine", "Includes", "CaseInsensitive"]
+        }
+      },
+      {
+        "name": "list_dir",
+        "description": "List the contents of a directory",
+        "type": "tool",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "DirectoryPath": {
+              "type": "string",
+              "description": "Path to list contents of, should be absolute path to a directory"
+            }
+          },
+          "required": ["DirectoryPath"]
+        }
+      },
+      {
+        "name": "view_file",
+        "description": "View the contents of a file",
+        "type": "tool",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "AbsolutePath": {
+              "type": "string",
+              "description": "Path to file to view. Must be an absolute path"
+            },
+            "StartLine": {
+              "type": "integer",
+              "description": "Startline to view"
+            },
+            "EndLine": {
+              "type": "integer",
+              "description": "Endline to view"
+            }
+          },
+          "required": ["AbsolutePath", "StartLine", "EndLine"]
+        }
+      },
+      {
+        "name": "run_command",
+        "description": "Run a command on behalf of the user",
+        "type": "tool",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "Command": {
+              "type": "string",
+              "description": "Name of the command to run"
+            },
+            "Cwd": {
+              "type": "string",
+              "description": "The current working directory for the command"
+            },
+            "ArgsList": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "The list of arguments to pass to the command"
+            },
+            "Blocking": {
+              "type": "boolean",
+              "description": "If true, the command will block until it is entirely finished"
+            },
+            "WaitMsBeforeAsync": {
+              "type": "integer",
+              "description": "Amount of milliseconds to wait after starting the command before sending it to be fully async"
+            }
+          },
+          "required": ["Command", "Cwd", "ArgsList", "Blocking", "WaitMsBeforeAsync"]
+        }
+      },
+      {
+        "name": "write_to_file",
+        "description": "Create new files",
+        "type": "tool",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "TargetFile": {
+              "type": "string",
+              "description": "The target file to create and write code to"
+            },
+            "CodeContent": {
+              "type": "string",
+              "description": "The code contents to write to the file"
+            },
+            "EmptyFile": {
+              "type": "boolean",
+              "description": "Set this to true to create an empty file"
+            }
+          },
+          "required": ["TargetFile", "CodeContent", "EmptyFile"]
+        }
+      },
+      {
+        "name": "edit_file",
+        "description": "Edit an existing file",
+        "type": "tool",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "TargetFile": {
+              "type": "string",
+              "description": "The target file to modify"
+            },
+            "CodeEdit": {
+              "type": "string",
+              "description": "The code edits to make"
+            },
+            "CodeMarkdownLanguage": {
+              "type": "string",
+              "description": "Markdown language for the code block"
+            },
+            "Instruction": {
+              "type": "string",
+              "description": "A description of the changes"
+            },
+            "Blocking": {
+              "type": "boolean",
+              "description": "If true, blocks until the entire file diff is generated"
+            }
+          },
+          "required": ["CodeMarkdownLanguage", "TargetFile", "CodeEdit", "Instruction", "Blocking"]
+        }
+      }
+    ]
+  }
+]
